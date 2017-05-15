@@ -1,0 +1,16 @@
+{
+    "name": "knowfox/entangle",
+    "description": "Entangled timelines. https://entangle.de as a Knowfox package.",
+    "type": "library",
+    "require": {
+        "illuminate/support": "^5.4"
+    },
+    "license": "GPL v3",
+    "authors": [
+        {
+            "name": "Olav Schettler",
+            "email": "olav@schettler.net"
+        }
+    ],
+    "minimum-stability": "dev"
+}
