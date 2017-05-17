@@ -12,5 +12,5 @@
             "email": "olav@schettler.net"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
