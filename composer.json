@@ -12,5 +12,10 @@
             "email": "olav@schettler.net"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Knowfox\\Entangle\\": "src/"
+        }
+    }
 }
