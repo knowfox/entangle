@@ -2,25 +2,14 @@
 
 namespace Knowfox\Entangle\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Knowfox\Models\Concept;
 
-class Event extends Model
+class Event extends Concept
 {
-    protected $table = 'entangle_events';
+    protected $table = 'concepts';
 
-    public function concept()
+    public function event()
     {
-        return $this->belongsTo(Concept::class);
-    }
-
-    public function timeline()
-    {
-        return $this->belongsTo(Timeline::class);
-    }
-
-    public function location()
-    {
-        return $this->belongsTo(Location::class);
+        return $this->hasOne(EventExtension::class, 'concept_id');
     }
 }

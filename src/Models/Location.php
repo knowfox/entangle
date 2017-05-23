@@ -5,12 +5,12 @@ namespace Knowfox\Entangle\Models;
 use Illuminate\Database\Eloquent\Model;
 use Knowfox\Models\Concept;
 
-class Location extends Model
+class Location extends Concept
 {
-    protected $table = 'entangle_locations';
+    protected $table = 'concepts';
 
-    public function concept()
+    public function event()
     {
-        return $this->belongsTo(Concept::class);
+        return $this->hasOne(LocationExtension::class, 'concept_id');
     }
 }

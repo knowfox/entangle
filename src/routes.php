@@ -1,11 +1,22 @@
 <?php
 
 use Knowfox\Entangle\Controllers\EntangledController;
+use Knowfox\Entangle\Controllers\ImportController;
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/timeline', [
         'as' => 'entangle.timeline',
-        'uses' => EntangledController::class . '@timelines'
+        'uses' => EntangledController::class . '@timelines',
+    ]);
+
+    Route::get('/entangle', [
+        'as' => 'entangle.import',
+        'uses' => ImportController::class . '@index',
+    ]);
+
+    Route::post('/entangle', [
+        'as' => 'entangle.save',
+        'uses' => ImportController::class . '@save',
     ]);
 });
 
