@@ -75,22 +75,22 @@ class ImportEntangle extends Command
         }
         $result = json_decode($res->getBody());
         if (!empty($result->status) && $result->status == 'success') {
-            return $result->user;
+            return $result->person;
         }
         else {
             throw \Exception($result->message);
         }
     }
 
-    private function importEvent($url, $token, $csrf_token, $owner_id, $event)
+    private function importEvent($url, $token, $csrf_token, $person_id, $event)
     {
         $res = $this->client->request('POST', $url . '/entangle', [
             'form_params' => [
                 'token' => $token,
                 'type' => 'event',
-                'owner_id' => $owner_id,
+                'person_id' => $person_id,
 
-                'timeline_slug' => $event->timeline->name,
+                'timeline_title' => $event->timeline->title,
 
                 'source_id' => $event->source_id,
                 'replicated' => $event->replicated,
@@ -163,7 +163,7 @@ class ImportEntangle extends Command
 
         foreach ($users as $imported_user) {
             $this->info('Importing user ' . $imported_user->username . ' ...');
-            $user = $this->importUser($url, $token, $csrf_token, $imported_user);
+            $person = $this->importUser($url, $token, $csrf_token, $imported_user);
 
             $events = ImportedEvent::with('timeline')
                 ->whereIn('timeline_id', $imported_user->timelines->pluck('id'))
@@ -171,7 +171,7 @@ class ImportEntangle extends Command
 
             foreach ($events as $imported_event) {
                 $this->info(' - Importing event ' . $imported_event->title . ' ...');
-                $this->importEvent($url, $token, $csrf_token, $user->id, $imported_event);
+                $this->importEvent($url, $token, $csrf_token, $person->id, $imported_event);
             }
         }
     }
