@@ -16,7 +16,10 @@ class ImportService
             'owner_id' => Auth::id(),
         ]);
 
-        $name_parts = preg_split('/\s+/', $data['name'], 2);
+        $name_parts = preg_split('/\s+/', $data['name'], 3);
+        if (in_array($name_parts[0], ['Dr.', 'Prof.'])) {
+            array_shift($name_parts);
+        }
         if (count($name_parts) > 1) {
             $person_name = $name_parts[1] . ', ' . $name_parts[0];
         }

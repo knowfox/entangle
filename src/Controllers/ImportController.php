@@ -57,7 +57,7 @@ class ImportController extends Controller
 
         switch ($request->type) {
             case 'user':
-                $data = ['user' => $importer->saveUser($request->all())];
+                $data = ['person' => $importer->savePerson($request->all())];
                 break;
 
             case 'event':
