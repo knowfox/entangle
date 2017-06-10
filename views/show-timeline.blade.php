@@ -15,7 +15,7 @@
             <tbody>
             @foreach ($events as $event)
                 <tr>
-                    <td>{{$event->id}}</td>
+                    <td><a href="{{route('concept.show', [$event])}}">{{$event->id}}</a></td>
                     <td>{{$event->date_from}}</td>
                     <td>{{$event->title}}</td>
                 </tr>
@@ -25,4 +25,7 @@
         </table>
     @endif
 
+@endsection
+
+@section('children')
 @endsection
