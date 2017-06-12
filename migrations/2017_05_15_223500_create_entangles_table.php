@@ -26,8 +26,8 @@ class CreateEntanglesTable extends Migration
             $table->integer('location_id')->unsigned()->nullable();
             $table->foreign('location_id')->references('id')->on('concepts');
             $table->date('date_from');
-            $table->integer('duration')->nullable();
-            $table->string('duration_unit')->nullable();
+            $table->integer('duration')->nullable()->default(1);
+            $table->string('duration_unit')->nullable()->default('d');
             $table->date('date_to')->nullable();
             $table->string('anniversary')->nullable();
         });

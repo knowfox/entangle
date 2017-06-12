@@ -11,19 +11,19 @@ use Knowfox\Entangle\Models\LocationExtension;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
+    protected function mergeConfigRecursiveFrom($path, $key)
+    {
+        $config = $this->app['config']->get($key, []);
+        $this->app['config']->set($key, array_merge_recursive(require $path, $config));
+    }
+
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
 
-        Config::set('knowfox.types',
-            array_unique(
-                array_merge(
-                    config('knowfox.types'),
-                    ['event', 'location', 'timeline']
-                )
-            )
+        $this->mergeConfigRecursiveFrom(
+            __DIR__ . '/../config.php', 'knowfox'
         );
-
         $this->loadViewsFrom(__DIR__ . '/../views', 'entangle');
 
         if ($this->app->runningInConsole()) {

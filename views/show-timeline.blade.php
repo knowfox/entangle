@@ -4,22 +4,24 @@
     @parent
 
     @if ($concept->children()->count())
-        <?php
-        $events = $concept->children()
-            ->leftJoin('entangle_events', 'entangle_events.concept_id', '=', 'concepts.id')
-            ->select('concepts.*', 'entangle_events.*')
-            ->orderBy('entangle_events.date_from', 'desc')
-            ->get();
-        ?>
         <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date from</th>
+                    <th>Date from</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
             <tbody>
-            @foreach ($events as $event)
+            @foreach ($concept->children as $event)
                 <tr>
                     <td><a href="{{route('concept.show', [$event])}}">{{$event->id}}</a></td>
-                    <td>{{$event->date_from}}</td>
+                    <td class="text-nowrap">{{$event->date_from}}</td>
+                    <td class="text-nowrap">{{$event->date_to}}</td>
                     <td>{{$event->title}}</td>
                 </tr>
-                <tr><td colspan="3">{{$event->body}}</td></tr>
+                <tr><td colspan="4">{{$event->body}}</td></tr>
             @endforeach
             </tbody>
         </table>
