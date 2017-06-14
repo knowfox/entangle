@@ -9,7 +9,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Date from</th>
-                    <th>Date from</th>
+                    <th>Date to</th>
                     <th>Title</th>
                 </tr>
             </thead>
@@ -21,7 +21,7 @@
                     <td class="text-nowrap">{{$event->date_to}}</td>
                     <td>{{$event->title}}</td>
                 </tr>
-                <tr><td colspan="4">{{$event->body}}</td></tr>
+                <tr><td colspan="4">{!! $event->rendered_body !!}</td></tr>
             @endforeach
             </tbody>
         </table>

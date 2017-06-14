@@ -22,7 +22,6 @@
 @endsection
 
 @section('edit-concept')
-<div class="col-md-12">
     <hr>
     <h4>Event</h4>
     <div class="row">
@@ -37,10 +36,14 @@
                 <label for="title">Date to</label>
                 <input type="date" class="form-control" name="event[date_to]" value="{{$concept->event->date_to}}">
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Duration</label>
                 <input type="number" class="form-control" name="event[duration]" value="{{$concept->event->duration}}">
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Unit</label>
                 @include('partials.select', [
@@ -52,5 +55,4 @@
         </div>
     </div>
     <hr>
-</div>
 @endsection
