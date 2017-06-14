@@ -18,7 +18,7 @@ class Event extends Concept
         parent::fill($attributes);
 
         if (!empty($attributes['event'])) {
-            $event_id = $this->event->concept_id;
+            $event_id = $this->event ? $this->event->concept_id : null;
             $this->event()->updateOrCreate(['concept_id' => $event_id], $attributes['event']);
         }
 

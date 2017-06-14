@@ -3,6 +3,7 @@
 @section('main-content')
     <table class="table">
         <tbody>
+        @if ($concept->event)
             @if ($concept->event->date_to)
                 <tr>
                     <th>From</th><td>{{$concept->event->date_from}}</td>
@@ -15,6 +16,7 @@
                     <th>On</th><td>{{$concept->event->date_from}}</td>
                 </tr>
             @endif
+        @endif
         </tbody>
     </table>
 
@@ -28,19 +30,19 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Date from</label>
-                <input type="date" class="form-control" name="event[date_from]" value="{{$concept->event->date_from}}">
+                <input type="date" class="form-control" name="event[date_from]" value="{{ $concept->event ? $concept->event->date_from : '' }}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Date to</label>
-                <input type="date" class="form-control" name="event[date_to]" value="{{$concept->event->date_to}}">
+                <input type="date" class="form-control" name="event[date_to]" value="{{ $concept->event ? $concept->event->date_to : '' }}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Duration</label>
-                <input type="number" class="form-control" name="event[duration]" value="{{$concept->event->duration}}">
+                <input type="number" class="form-control" name="event[duration]" value="{{ $concept->event ? $concept->event->duration : '' }}">
             </div>
         </div>
         <div class="col-md-6">
@@ -48,7 +50,7 @@
                 <label for="title">Unit</label>
                 @include('partials.select', [
                     'name' => 'event[duration_unit]',
-                    'selected' => $concept->event->duration_unit,
+                    'selected' => $concept->event ? $concept->event->duration_unit : '',
                     'options' => config('knowfox.duration_units')
                 ])
             </div>
