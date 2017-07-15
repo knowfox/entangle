@@ -6,14 +6,14 @@
         @if ($concept->event)
             @if ($concept->event->date_to)
                 <tr>
-                    <th>From</th><td>{{$concept->event->date_from}}</td>
+                    <th>From</th><td>{{$concept->date_from}} ({{$concept->weekday_from}})</td>
                 </tr>
                 <tr>
-                    <th>Until</th><td>{{$concept->event->date_to}}</td>
+                    <th>Until</th><td>{{$concept->date_to}} ({{$concept->weekday_to}})</td>
                 </tr>
             @else
                 <tr>
-                    <th>On</th><td>{{$concept->event->date_from}}</td>
+                    <th>On</th><td>{{$concept->date_from}} ({{$concept->weekday_from}})</td>
                 </tr>
             @endif
         @endif
