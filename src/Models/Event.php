@@ -34,26 +34,7 @@ class Event extends Concept
 
     public function getDateToAttribute()
     {
-        if ($this->event->date_to) {
-            return $this->event->date_to;
-        }
-        if (empty($this->event->duration) || empty($this->event->duration_unit)) {
-            $this->event->date_from;
-        }
-
-        $date = new Carbon($this->event->date_from);
-        switch ($this->event->duration_unit) {
-            case 'd':
-                return $date->addDays($this->event->duration - 1)->toDateString();
-            case 'm':
-                $date->addMonths($this->event->duration);
-                return $date->subDay()->toDateString();
-            case 'y':
-                $date->addYears($this->event->duration);
-                return $date->subDay()->toDateString();
-            default:
-                return $this->event->date_from;
-        }
+        return $this->event->date_to;
     }
 
     public function getWeekdayFromAttribute()

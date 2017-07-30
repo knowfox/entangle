@@ -28,34 +28,33 @@ class EventExtension extends Model
         if ($value) {
             return $value;
         }
-        else {
-            if ($this->duration_unit) {
-                $duration = " ({$this->duration}{$this->duration_unit})";
-                switch ($this->duration_unit) {
-                    case 'd':
-                        if ($this->duration == 1) {
-                            $until = '';
-                        }
-                        else {
-                            $until = (new Carbon($this->date_from))
-                                    ->addDays($this->duration)->toDateString()
-                                . $duration;
-                        }
-                        break;
-                    case 'm':
-                        $until = (new Carbon($this->date_from))
-                                ->addMonths($this->duration)->toDateString()
-                            . $duration;
-                        break;
-                    case 'y':
-                        $until = (new Carbon($this->date_from))
-                                ->addYears($this->duration)->toDateString()
-                            . $duration;
-                        break;
-                }
-                return $until;
-            }
-            return '';
+        if (empty($this->duration) || empty($this->duration_unit)) {
+            return $this->date_from;
         }
+
+        $date = new Carbon($this->date_from);
+        switch ($this->duration_unit) {
+            case 'd':
+                return $date->addDays($this->duration - 1)->toDateString();
+            case 'm':
+                $date->addMonths($this->duration);
+                return $date->subDay()->toDateString();
+            case 'y':
+                $date->addYears($this->duration);
+                return $date->subDay()->toDateString();
+            default:
+                return $this->date_from;
+        }
+    }
+
+    public function getDateToDisplayAttribute($value)
+    {
+        $date_to = $this->date_to;
+
+        if ($this->duration_unit) {
+            $duration = " ({$this->duration}{$this->duration_unit})";
+            $date_to .= $duration;
+        }
+        return $date_to;
     }
 }
