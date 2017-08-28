@@ -2,6 +2,7 @@
 
 use Knowfox\Entangle\Controllers\EntangledController;
 use Knowfox\Entangle\Controllers\ImportController;
+use Knowfox\Entangle\Controllers\PersonController;
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/timeline', [
@@ -17,6 +18,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/entangle', [
         'as' => 'entangle.save',
         'uses' => ImportController::class . '@save',
+    ]);
+
+    Route::get('/person/{slug}', [
+        'as' => 'entangle.person',
+        'uses' => PersonController::class . '@show',
     ]);
 });
 

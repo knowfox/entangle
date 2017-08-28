@@ -4,6 +4,7 @@ return [
     'types' => [
         'entangle:event',
         'entangle:location',
+        'entangle:person',
         'entangle:timeline',
     ],
 
