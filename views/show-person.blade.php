@@ -5,26 +5,18 @@
     <section class="fields">
         <table class="table">
             <tbody>
-            <tr>
-                <th>Slug</th>
-                <td>{{$concept->slug or '-'}}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{$concept->config->firstname or '-'}}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{$concept->config->lastname or '-'}}</td>
-            </tr>
-            <tr>
-                <th>E-Mail</th>
-                <td>{{$concept->config->email or '-'}}</td>
-            </tr>
-            <tr>
-                <th>Mobile</th>
-                <td>{{$concept->config->mobile or '-'}}</td>
-            </tr>
+
+            @php
+            $config = $concept->config;
+            $config->slug = $concept->slug;
+            @endphp
+
+            @foreach ($config as $key => $value)
+                <tr>
+                    <th>{{ ucfirst($key) }}</th>
+                    <td>{{ $value }}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
 
@@ -38,4 +30,3 @@
 
 @section('config')
 @endsection
-
