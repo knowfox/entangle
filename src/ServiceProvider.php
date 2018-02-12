@@ -14,7 +14,7 @@ class ServiceProvider extends IlluminateServiceProvider
     protected function mergeConfigRecursiveFrom($path, $key)
     {
         $config = $this->app['config']->get($key, []);
-        $this->app['config']->set($key, array_merge_recursive(require $path, $config));
+        $this->app['config']->set($key, array_merge_recursive($config, require $path));
     }
 
     public function boot()
