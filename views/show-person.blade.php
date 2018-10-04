@@ -14,7 +14,7 @@
             @foreach ($config as $key => $value)
                 <tr>
                     <th>{{ ucfirst($key) }}</th>
-                    <td>{{ $value }}</td>
+                    <td>{{ is_object($value) ? Symfony\Component\Yaml\Yaml::dump($value) : $value }}</td>
                 </tr>
             @endforeach
             </tbody>
