@@ -29,12 +29,12 @@ class Event extends Concept
 
     public function getDateFromAttribute()
     {
-        return $this->event->date_from;
+        return is_object($this->event) ? $this->event->date_from : null;
     }
 
     public function getDateToAttribute()
     {
-        return $this->event->date_to;
+        return is_object($this->event) ? $this->event->date_to : null;
     }
 
     public function getWeekdayFromAttribute()

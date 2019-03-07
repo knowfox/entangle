@@ -17,7 +17,7 @@
                 @foreach ($concept->children as $event)
                     <tr>
                         <td class="text-nowrap" title="{{$event->weekday_from}}">{{$event->date_from}}</td>
-                        <td class="text-nowrap" title="{{$event->weekday_to}}">{{$event->event->date_to_display}} @if ($event->event->date_to)@endif</td>
+                        <td class="text-nowrap" title="{{$event->weekday_to}}">{{$event->event->date_to_display ?? ''}}</td>
                         <td><a href="{{route('concept.show', [$event])}}">{{$event->title}}</a></td>
                     </tr>
                 @endforeach
