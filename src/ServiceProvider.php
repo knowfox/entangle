@@ -2,39 +2,39 @@
 
 namespace Knowfox\Entangle;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Knowfox\Entangle\Commands\ImportEntangle;
-use Knowfox\Entangle\Models\EventExtension;
-use Knowfox\Entangle\Models\LocationExtension;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
-    protected function mergeConfigRecursiveFrom($path, $key)
-    {
-        $config = $this->app['config']->get($key, []);
-        $this->app['config']->set($key, array_merge_recursive($config, require $path));
-    }
+    protected $namespace = '\Knowfox\Entangle\Controllers';
 
-    public function boot()
-    {
-        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
-
-        $this->mergeConfigRecursiveFrom(
-            __DIR__ . '/../config.php', 'knowfox'
-        );
-        $this->loadViewsFrom(__DIR__ . '/../views', 'entangle');
-
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                ImportEntangle::class,
-            ]);
-        }
-    }
-
+    /**
+     * Register services.
+     *
+     * @return void
+     */
     public function register()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config.php', 'knowfox'
+        );
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(__DIR__ . '/../routes.php');
+
+        $this->loadViewsFrom(__DIR__ . '/../views', 'entangle');
+
+        $this->publishes([
+            __DIR__ . '/../config.php' => config_path('entangle.php'),
+        ]);
     }
 }

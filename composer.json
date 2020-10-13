@@ -3,7 +3,7 @@
     "description": "Entangled timelines. https://entangle.de as a Knowfox package.",
     "type": "library",
     "require": {
-        "illuminate/support": "^5.4"
+        "illuminate/support": "^8.0"
     },
     "license": "GPL v3",
     "authors": [
@@ -13,6 +13,13 @@
         }
     ],
     "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Knowfox\\Entangle\\ServiceProvider"
+            ]
+        }
+    },
     "autoload": {
         "psr-4": {
             "Knowfox\\Entangle\\": "src/"
