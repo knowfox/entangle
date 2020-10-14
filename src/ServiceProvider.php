@@ -16,9 +16,6 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config.php', 'knowfox'
-        );
     }
 
     /**
@@ -28,6 +25,12 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function boot()
     {
+        /** 2020-10. HOTFIX. Need to find a way to merge this into existing keys
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config.php', 'knowfox'
+        );
+        */
+
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../routes.php');
