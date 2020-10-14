@@ -1,4 +1,4 @@
-@extends('concept.show')
+@extends('knowfox::concept.show')
 
 @section('main-content')
     <table class="table">
@@ -48,7 +48,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="title">Unit</label>
-                @include('partials.select', [
+                @include('knowfox::partials.select', [
                     'name' => 'event[duration_unit]',
                     'selected' => $concept->event ? $concept->event->duration_unit : '',
                     'options' => config('knowfox.duration_units')
