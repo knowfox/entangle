@@ -3,6 +3,7 @@
 namespace Knowfox\Entangle;
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
