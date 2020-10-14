@@ -9,6 +9,17 @@ class ServiceProvider extends IlluminateServiceProvider
 {
     protected $namespace = '\Knowfox\Entangle\Controllers';
 
+    protected function mergeConfigRecursiveFrom($path, $key)
+    {
+        if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+            $config = $this->app->make('config');
+
+            $config->set($key, array_merge_recursive(
+                require $path, $config->get($key, [])
+            ));
+        }
+    }
+
     /**
      * Register services.
      *
@@ -25,20 +36,14 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function boot()
     {
-        /** 2020-10. HOTFIX. Need to find a way to merge this into existing keys
-        $this->mergeConfigFrom(
+        $this->mergeConfigRecursiveFrom(
             __DIR__ . '/../config.php', 'knowfox'
         );
-        */
 
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../routes.php');
 
         $this->loadViewsFrom(__DIR__ . '/../views', 'entangle');
-
-        $this->publishes([
-            __DIR__ . '/../config.php' => config_path('entangle.php'),
-        ]);
     }
 }
