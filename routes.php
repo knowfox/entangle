@@ -1,9 +1,5 @@
 <?php
 
-use Knowfox\Entangle\Controllers\EntangledController;
-use Knowfox\Entangle\Controllers\ImportController;
-use Knowfox\Entangle\Controllers\PersonController;
-
 Route::group(['middleware' => 'web'], function () {
     Route::get('/timeline', [
         'as' => 'entangle.timeline',
