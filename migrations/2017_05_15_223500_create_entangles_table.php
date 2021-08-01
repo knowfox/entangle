@@ -14,16 +14,16 @@ class CreateEntanglesTable extends Migration
     public function up()
     {
         Schema::create('entangle_locations', function (Blueprint $table) {
-            $table->integer('concept_id')->unsigned();
+            $table->bigInteger('concept_id')->unsigned();
             $table->foreign('concept_id')->references('id')->on('concepts');
             $table->float('longitude')->nullable();
             $table->float('latitude')->nullable();
         });
 
         Schema::create('entangle_events', function (Blueprint $table) {
-            $table->integer('concept_id')->unsigned();
+            $table->bigInteger('concept_id')->unsigned();
             $table->foreign('concept_id')->references('id')->on('concepts');
-            $table->integer('location_id')->unsigned()->nullable();
+            $table->bigInteger('location_id')->unsigned()->nullable();
             $table->foreign('location_id')->references('id')->on('concepts');
             $table->date('date_from');
             $table->integer('duration')->nullable()->default(1);
