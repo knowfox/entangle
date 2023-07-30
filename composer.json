@@ -3,7 +3,7 @@
     "description": "Entangled timelines. https://entangle.de as a Knowfox package.",
     "type": "library",
     "require": {
-        "illuminate/support": "^8.0"
+        "illuminate/support": "^9.0"
     },
     "license": "GPL v3",
     "authors": [
